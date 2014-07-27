@@ -1,0 +1,62 @@
+---
+title       : Shiny App - Cars k-means Clustering
+subtitle    : A pitch for my shiny App
+author      : Shavar Beckford
+job         : Data Scientist
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Intro
+This is as pitch for my shiny app called Cars k-means Clustering. 
+
+This App does the following:
+
+1. Uses the 'mtCars' dataset
+2. Allows user to input column names into X and Y axis
+3. Select the number of clusters
+4. Cluster cars into groups based on input
+
+--- .class #id 
+
+## Why Do We Need Cars Clustering?
+
+Car manufactures are looking for better ways to clasiffy cars based on attributes in order to 
+discover which cars performs similary. This will help car companies predict future repairs and optimization.
+
+--- .class #id
+
+## How Does Cars Clustering Work?
+
+When users input values from the 'mtCars' dataset, the cars are clustered using the following k-means clustering algorithm in server.R
+
+```
+clusters <- reactive({
+                kmeans(selectedData(), input$clusters)
+```
+and a plot is created using the following code
+
+```
+output$plot1 <- renderPlot({
+                par(mar = c(5.1, 4.1, 0, 1))
+                plot(selectedData(),
+                     col = clusters()$cluster,
+                     pch = 20, cex = 3)
+                points(clusters()$centers, pch = 4, cex = 4, lwd = 4)
+        })
+```
+
+--- .class #id
+
+## Conclusion and Next Steps
+
+The Shiny clustering app help car manufactuers group cars into sinilar groups to help predict future repairs and optimization
+
+Next Steps for Clustering App:
+
+1. Improve app to show accuracy of clusters
+2. App more variables to classify on
